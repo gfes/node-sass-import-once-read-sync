@@ -6,7 +6,8 @@
 
 var fs = require('fs'),
     yaml = require('js-yaml'),
-    path = require('path');
+    path = require('path'),
+    isFile = require("is-file");
 
 /**
  * All imports use the forward slash as a directory
@@ -229,25 +230,32 @@ var readFirstFile = function readFirstFile(uri, filenames, css, cb, examinedFile
   var filename = filenames.shift();
   examinedFiles = examinedFiles || [];
   examinedFiles.push(filename);
-  fs.readFile(filename, function(err, data) {
-    if (err) {
-      if (filenames.length) {
-        readFirstFile(uri, filenames, css, cb, examinedFiles);
-      }
-      else {
-        cb(new Error('Could not import `' + uri + '` from any of the following locations:\n  ' + examinedFiles.join('\n  ')));
-      }
+  
+  if(isFile(filename)){
+    //noinspection JSAnnotator
+    let data = fs.readFileSync(filename);
+
+    if ([ '.js', '.json', '.yml', '.yaml' ].indexOf(path.extname(filename)) !== -1) {
+      data = parseJSON(data, filename);
+    }
+    cb(null, {
+      'contents': data.toString(),
+      'file': filename
+    });
+
+    cb(null, {
+      'contents': data.toString(),
+      'file': filename
+    });
+  }else {
+    if (filenames.length) {
+      // console.log("readnext",filenames[0])
+      readFirstFile(uri, filenames, css, cb, examinedFiles);
     }
     else {
-      if ([ '.js', '.json', '.yml', '.yaml' ].indexOf(path.extname(filename)) !== -1) {
-        data = parseJSON(data, filename);
-      }
-      cb(null, {
-        'contents': data.toString(),
-        'file': filename
-      });
+      cb(new Error('Could not import `' + uri + '` from any of the following locations:\n  ' + examinedFiles.join('\n  ')));
     }
-  });
+  }
 };
 
 // This is a bootstrap function for calling readFirstFile.
