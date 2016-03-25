@@ -1,4 +1,6 @@
-# Import Once [![npm version](https://badge.fury.io/js/node-sass-import-once.svg)](http://badge.fury.io/js/node-sass-import-once) [![Build Status](https://travis-ci.org/at-import/node-sass-import-once.svg)](https://travis-ci.org/at-import/node-sass-import-once)
+# Import Once (read file synchronous) [![npm version](https://badge.fury.io/js/node-sass-import-once-read-sync.svg)](http://badge.fury.io/js/node-sass-import-once-read-sync) [![Build Status](https://travis-ci.org/at-import/node-sass-import-once-read-sync.svg)](https://travis-ci.org/at-import/node-sass-import-once-read-sync)
+
+**use readFileSync instead of readFile , slove the problem sometimes readFile callback not execute and hangs**
 
 General `import-once` importer for [`node-sass`](https://github.com/sass/node-sass) inspired by [Eyeglass](https://github.com/sass-eyeglass/eyeglass).
 
