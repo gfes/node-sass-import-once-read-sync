@@ -1,13 +1,14 @@
 # Import Once (read file synchronous) [![npm version](https://badge.fury.io/js/node-sass-import-once-read-sync.svg)](http://badge.fury.io/js/node-sass-import-once-read-sync) [![Build Status](https://travis-ci.org/at-import/node-sass-import-once-read-sync.svg)](https://travis-ci.org/at-import/node-sass-import-once-read-sync)
 
-**use readFileSync instead of readFile , slove the problem sometimes readFile callback not execute and hangs**
+**The same as node-sass-import-once**
+**use readFileSync instead of readFile , fix the problem which sometimes readFile callback not execute and hangs**
 
 General `import-once` importer for [`node-sass`](https://github.com/sass/node-sass) inspired by [Eyeglass](https://github.com/sass-eyeglass/eyeglass).
 
 ## Installation
 
 ```bash
-$ npm install node-sass-import-once --save-dev
+$ npm install node-sass-import-once-read-sync --save-dev
 ```
 
 **Requires [Node Sass](https://github.com/sass/node-sass) >= v3.0.0-alpha.5**
@@ -16,7 +17,7 @@ $ npm install node-sass-import-once --save-dev
 
 ```javascript
 var sass = require('node-sass');,
-    importOnce = require('node-sass-import-once');
+    importOnce = require('node-sass-import-once-read-sync');
 
 sass.render({
   file: scss_filename,
@@ -29,7 +30,7 @@ sass.render({
 });
 ```
 
-If you are using Gulp or Grunt to compile (or similiar), require `node-sass-import-once` as normal and pass it as the `importer` option in to your task.
+If you are using Gulp or Grunt to compile (or similiar), require `node-sass-import-once-read-sync` as normal and pass it as the `importer` option in to your task.
 
 ## Features
 
